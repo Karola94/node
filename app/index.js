@@ -1,28 +1,19 @@
-var OSinfo = require('../modules/OSinfo');
+var time = require('../modules/timeFormat');
 
 process.stdin.setEncoding('utf-8');
 
+console.log('Write number of seconds: '); 
+
 process.stdin.on('readable', function() {
-    var input = process.stdin.read();    
+    var input = process.stdin.read();      
     if(input !== null) {        
-        var instruction = input.toString().trim();
-        switch(instruction) {
-            case '/exit':
-                process.stdout.write('Quitting app!\n');
-                process.exit();
-                break;
-            case '/version':
-                console.log(process.versions);
-                break;
-            case '/lang':
-                console.log(process.env.LANG);
-                break;
-            case '/getOSinfo':
-                OSinfo.print();
-                break;
-            default:
-                process.stderr.write('Wrong instruction!');
-        }     
+        var instruction = parseInt(input.trim());
+        if(Number.isInteger(instruction) === true) {
+            var result = time.time(instruction);
+            console.log(result);
+        } else {
+            console.log('Wrong number format. Not an integer!');
+        }        
     }
 });
 
