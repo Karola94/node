@@ -23,7 +23,8 @@ server.on('request', function (request, response) {
             response.end();        
         });       
     } else {
-        fs.readFile('./index.html', 'utf-8', function(err, data) {            
+        fs.readFile('./index.html', 'utf-8', function(err, data) { 
+                   
             response.write('<img src="404error.jpeg" alt="Not found"/>');
             response.end();                   
         });   
